@@ -6,6 +6,7 @@ enable_phase2_storage = false
 enable_phase2_databases = false
 enable_phase2_compute = false
 enable_phase2_security = false
+enable_phase3_kubernetes = false
 # compute_admin_ssh_public_key = "ssh-ed25519 AAAA..."
 # aws_ami_id = "ami-0123456789abcdef0"
 # Set only through an approved secret mechanism when Azure database deployment is enabled.

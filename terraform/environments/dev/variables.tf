@@ -48,6 +48,11 @@ variable "enable_phase2_security" {
   type        = bool
   default     = false
 }
+variable "enable_phase3_kubernetes" {
+  description = "Explicitly create private Kubernetes clusters; defaults to false."
+  type        = bool
+  default     = false
+}
 variable "compute_admin_ssh_public_key" {
   description = "SSH public key for Azure VMSS administration; supply only when Azure compute is enabled."
   type        = string

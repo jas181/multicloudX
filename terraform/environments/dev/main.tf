@@ -158,3 +158,32 @@ module "gcp_security" {
   source     = "../../modules/gcp-security"
   project_id = var.gcp_project_id
 }
+
+module "aks" {
+  count               = contains(var.enabled_clouds, "azure") && var.enable_phase3_kubernetes ? 1 : 0
+  source              = "../../modules/aks"
+  name_prefix         = local.prefix
+  location            = var.azure_location
+  resource_group_name = module.azure_landing_zone[0].resource_group_name
+  subnet_id           = module.azure_network[0].app_subnet_id
+  tags                = local.tags
+}
+
+module "eks" {
+  count       = contains(var.enabled_clouds, "aws") && var.enable_phase3_kubernetes ? 1 : 0
+  source      = "../../modules/eks"
+  name_prefix = local.prefix
+  subnet_ids  = module.aws_network[0].private_app_subnet_ids
+  tags        = local.tags
+}
+
+module "gke" {
+  count       = contains(var.enabled_clouds, "gcp") && var.enable_phase3_kubernetes ? 1 : 0
+  source      = "../../modules/gke"
+  name_prefix = local.prefix
+  project_id  = var.gcp_project_id
+  region      = var.gcp_region
+  subnet_id   = module.gcp_network[0].app_subnet_id
+  network_id  = module.gcp_network[0].network_id
+  labels      = local.tags
+}
