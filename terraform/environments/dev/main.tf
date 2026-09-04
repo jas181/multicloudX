@@ -141,3 +141,20 @@ module "gcp_compute" {
   network_id  = module.gcp_network[0].network_id
   labels      = local.tags
 }
+
+module "azure_security" {
+  count                  = contains(var.enabled_clouds, "azure") && var.enable_phase2_security ? 1 : 0
+  source                 = "../../modules/azure-security"
+  security_contact_email = var.tags["owner"]
+}
+
+module "aws_security" {
+  count  = contains(var.enabled_clouds, "aws") && var.enable_phase2_security ? 1 : 0
+  source = "../../modules/aws-security"
+}
+
+module "gcp_security" {
+  count      = contains(var.enabled_clouds, "gcp") && var.enable_phase2_security ? 1 : 0
+  source     = "../../modules/gcp-security"
+  project_id = var.gcp_project_id
+}

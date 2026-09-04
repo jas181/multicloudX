@@ -43,6 +43,11 @@ variable "enable_phase2_compute" {
   type        = bool
   default     = false
 }
+variable "enable_phase2_security" {
+  description = "Explicitly enable Phase 2 cloud-native security services; defaults to false."
+  type        = bool
+  default     = false
+}
 variable "compute_admin_ssh_public_key" {
   description = "SSH public key for Azure VMSS administration; supply only when Azure compute is enabled."
   type        = string
