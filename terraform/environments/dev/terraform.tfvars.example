@@ -4,6 +4,9 @@ name_suffix = "team01"
 azure_subscription_id = "00000000-0000-0000-0000-000000000000"
 enable_phase2_storage = false
 enable_phase2_databases = false
+enable_phase2_compute = false
+# compute_admin_ssh_public_key = "ssh-ed25519 AAAA..."
+# aws_ami_id = "ami-0123456789abcdef0"
 # Set only through an approved secret mechanism when Azure database deployment is enabled.
 # database_admin_password = "never-commit-a-password"
 # aws_region = "us-east-2"

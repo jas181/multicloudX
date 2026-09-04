@@ -38,6 +38,21 @@ variable "database_admin_password" {
   default     = null
   sensitive   = true
 }
+variable "enable_phase2_compute" {
+  description = "Explicitly create Phase 2 compute and internal load-balancing resources; defaults to false."
+  type        = bool
+  default     = false
+}
+variable "compute_admin_ssh_public_key" {
+  description = "SSH public key for Azure VMSS administration; supply only when Azure compute is enabled."
+  type        = string
+  default     = null
+}
+variable "aws_ami_id" {
+  description = "Approved AMI ID for AWS compute; supply only when AWS compute is enabled."
+  type        = string
+  default     = null
+}
 variable "name_suffix" {
   type    = string
   default = "change-me"

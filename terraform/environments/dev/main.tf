@@ -109,3 +109,35 @@ module "gcp_postgresql" {
   network_id  = module.gcp_network[0].network_id
   labels      = local.tags
 }
+
+module "azure_compute" {
+  count                = contains(var.enabled_clouds, "azure") && var.enable_phase2_compute ? 1 : 0
+  source               = "../../modules/azure-compute"
+  name_prefix          = local.prefix
+  location             = var.azure_location
+  resource_group_name  = module.azure_landing_zone[0].resource_group_name
+  subnet_id            = module.azure_network[0].app_subnet_id
+  admin_ssh_public_key = var.compute_admin_ssh_public_key
+  tags                 = local.tags
+}
+
+module "aws_compute" {
+  count          = contains(var.enabled_clouds, "aws") && var.enable_phase2_compute ? 1 : 0
+  source         = "../../modules/aws-compute"
+  name_prefix    = local.prefix
+  vpc_id         = module.aws_network[0].vpc_id
+  app_subnet_ids = module.aws_network[0].private_app_subnet_ids
+  ami_id         = var.aws_ami_id
+  tags           = local.tags
+}
+
+module "gcp_compute" {
+  count       = contains(var.enabled_clouds, "gcp") && var.enable_phase2_compute ? 1 : 0
+  source      = "../../modules/gcp-compute"
+  name_prefix = local.prefix
+  project_id  = var.gcp_project_id
+  region      = var.gcp_region
+  subnet_id   = module.gcp_network[0].app_subnet_id
+  network_id  = module.gcp_network[0].network_id
+  labels      = local.tags
+}
