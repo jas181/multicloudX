@@ -1,0 +1,26 @@
+name: Reviewed development plan
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Apply reviewed development plan (never production)
+        required: true
+        type: boolean
+        default: false
+permissions: { contents: read, id-token: write }
+jobs:
+  plan:
+    environment: dev
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: multicloudx/terraform/environments/dev } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      # Configure only the OIDC/WIF action for clouds enabled in terraform.tfvars.
+      - run: terraform init -backend=false
+      - run: terraform plan -out=tfplan
+      - run: terraform show -json tfplan > plan.json
+      - uses: instrumenta/conftest-action@master
+        with: { files: multicloudx/terraform/environments/dev/plan.json, policy: multicloudx/policies }
+      - if: inputs.apply
+        run: terraform apply tfplan

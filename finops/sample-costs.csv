@@ -1,0 +1,4 @@
+cloud,account_or_project,environment,application,owner,monthly_cost,utilization,idle_resources,estimated_savings
+aws,123456789012,dev,multicloudx,platform@example.invalid,0,0,0,0
+azure,subscription-id,dev,multicloudx,platform@example.invalid,0,0,0,0
+gcp,project-id,dev,multicloudx,platform@example.invalid,0,0,0,0

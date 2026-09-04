@@ -1,0 +1,29 @@
+name: Validate infrastructure
+on:
+  pull_request:
+  push:
+    branches: [main, develop]
+permissions:
+  contents: read
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: multicloudx/terraform/environments/dev } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive ../..
+      - run: terraform init -backend=false
+      - run: terraform validate
+  policy-and-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: instrumenta/conftest-action@master
+        with: { files: multicloudx/policies/tests }
+      - uses: bridgecrewio/checkov-action@v12
+        with: { directory: multicloudx/terraform, config_file: multicloudx/.checkov.yml, soft_fail: true }
+      - uses: returntocorp/semgrep-action@v1
+        with: { config: multicloudx/.semgrep.yml }
+      - uses: aquasecurity/trivy-action@0.28.0
+        with: { scan-type: config, scan-ref: multicloudx }

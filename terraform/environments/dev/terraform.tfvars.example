@@ -1,0 +1,6 @@
+# Enable only the cloud accounts that are configured and approved for this POC.
+enabled_clouds = ["azure"]
+name_suffix = "team01"
+azure_subscription_id = "00000000-0000-0000-0000-000000000000"
+# aws_region = "us-east-2"
+# gcp_project_id = "your-project-id"

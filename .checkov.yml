@@ -1,0 +1,5 @@
+compact: true
+framework:
+  - terraform
+skip-check:
+  - CKV_AWS_144 # Cross-region replication is a Phase 2 decision; encryption and public access are enforced now.

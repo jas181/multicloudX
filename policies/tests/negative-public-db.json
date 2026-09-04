@@ -1,0 +1,1 @@
+{"resource_changes":[{"address":"aws_db_instance.bad","type":"aws_db_instance","change":{"after":{"publicly_accessible":true,"tags":{"application":"mcx","environment":"dev","owner":"team","cost_center":"cc","managed_by":"terraform"}}}}]}

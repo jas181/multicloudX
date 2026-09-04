@@ -1,0 +1,1 @@
+{"resource_changes":[{"address":"aws_s3_bucket.example","type":"aws_s3_bucket","change":{"after":{"server_side_encryption_configuration":{"rule":true},"tags":{"application":"mcx","environment":"dev","owner":"team","cost_center":"cc","managed_by":"terraform"}}}}]}

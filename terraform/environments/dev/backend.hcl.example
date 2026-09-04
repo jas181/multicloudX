@@ -1,0 +1,2 @@
+# Choose and configure exactly one approved remote backend; do not commit backend.hcl.
+# Example AzureRM backend fields: resource_group_name, storage_account_name, container_name, key

@@ -1,0 +1,7 @@
+rules:
+  - id: no-hardcoded-cloud-secret
+    languages: [generic]
+    message: Do not commit literal cloud credentials or passwords.
+    severity: ERROR
+    patterns:
+      - pattern-regex: '(?i)(aws_secret_access_key|client_secret|private_key|password)\\s*=\\s*["''][^$][^"'']+["'']'
