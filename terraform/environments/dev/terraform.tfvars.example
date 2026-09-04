@@ -2,5 +2,9 @@
 enabled_clouds = ["azure"]
 name_suffix = "team01"
 azure_subscription_id = "00000000-0000-0000-0000-000000000000"
+enable_phase2_storage = false
+enable_phase2_databases = false
+# Set only through an approved secret mechanism when Azure database deployment is enabled.
+# database_admin_password = "never-commit-a-password"
 # aws_region = "us-east-2"
 # gcp_project_id = "your-project-id"

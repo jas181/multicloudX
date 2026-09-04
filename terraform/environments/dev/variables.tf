@@ -22,6 +22,22 @@ variable "azure_subscription_id" {
 variable "aws_region" { type = string }
 variable "gcp_region" { type = string }
 variable "gcp_project_id" { type = string }
+variable "enable_phase2_storage" {
+  description = "Explicitly create Phase 2 storage resources; defaults to false to avoid charges."
+  type        = bool
+  default     = false
+}
+variable "enable_phase2_databases" {
+  description = "Explicitly create Phase 2 private PostgreSQL resources; defaults to false."
+  type        = bool
+  default     = false
+}
+variable "database_admin_password" {
+  description = "Supplied only through an approved secret-injection mechanism when Azure database deployment is enabled."
+  type        = string
+  default     = null
+  sensitive   = true
+}
 variable "name_suffix" {
   type    = string
   default = "change-me"
