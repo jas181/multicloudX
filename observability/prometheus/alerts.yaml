@@ -1,0 +1,18 @@
+groups:
+  - name: multicloudx-slo
+    rules:
+      - alert: HighServiceErrorRate
+        expr: sum(rate(http_server_requests_seconds_count{status=~"5.."}[5m])) / sum(rate(http_server_requests_seconds_count[5m])) > 0.01
+        for: 10m
+        labels: { severity: page }
+        annotations: { summary: "Service error rate exceeds 1%" }
+      - alert: HighP95Latency
+        expr: histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket[5m])) by (le)) > 0.5
+        for: 10m
+        labels: { severity: ticket }
+        annotations: { summary: "P95 request latency exceeds 500ms" }
+      - alert: KubernetesPodUnavailable
+        expr: kube_deployment_status_replicas_available < kube_deployment_spec_replicas
+        for: 15m
+        labels: { severity: page }
+        annotations: { summary: "Deployment has unavailable replicas" }

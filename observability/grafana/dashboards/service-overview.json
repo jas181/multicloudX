@@ -1,0 +1,1 @@
+{"title":"MultiCloudX Service Overview","schemaVersion":39,"panels":[{"type":"timeseries","title":"Request rate","targets":[{"expr":"sum(rate(http_server_requests_seconds_count[5m]))"}]},{"type":"timeseries","title":"5xx error rate","targets":[{"expr":"sum(rate(http_server_requests_seconds_count{status=~\"5..\"}[5m]))"}]}]}
