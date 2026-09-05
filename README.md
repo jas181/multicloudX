@@ -85,3 +85,5 @@ Phase 4 is in progress. The Spring Boot service reactor lives in [applications](
 Phase 5 observability foundations are in [observability](observability): OpenTelemetry Collector, Prometheus alerts, Grafana provisioning, and documented SLOs.
 
 Phase 7 FinOps foundations are in [finops](finops): normalized cost data, budget threshold examples, tag controls, and an idle-resource savings report.
+
+Phase 8 DR foundations are in [dr](dr): an AWS-primary/Azure-secondary scenario, RTO/RPO targets, and approved-manual failover/failback runbooks.

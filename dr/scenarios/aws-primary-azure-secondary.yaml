@@ -1,0 +1,20 @@
+scenario: aws-primary-azure-secondary
+application: multicloudx
+primary:
+  cloud: aws
+  region: us-east-2
+  services: [rds-postgresql, s3, eks]
+secondary:
+  cloud: azure
+  region: eastus2
+  services: [postgresql-flexible-server, storage-account, aks]
+objectives:
+  rto_minutes: 60
+  rpo_minutes: 15
+controls:
+  - AWS RDS automated backups and tested logical export
+  - Encrypted object replication or scheduled synchronization
+  - Terraform-reviewed Azure standby capacity
+  - DNS or global traffic manager manual cutover approval
+status: reference-only
+automation: none
