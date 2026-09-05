@@ -1,0 +1,1 @@
+{"resource_changes":[{"address":"aws_s3_bucket.bad","type":"aws_s3_bucket","change":{"after":{"tags":{"application":"mcx","environment":"dev","owner":"team","cost_center":"cc","managed_by":"terraform"}}}}]}

@@ -8,7 +8,7 @@ permissions:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    defaults: { run: { working-directory: multicloudx/terraform/environments/dev } }
+    defaults: { run: { working-directory: terraform/environments/dev } }
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
@@ -20,13 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: instrumenta/conftest-action@master
-        with: { files: multicloudx/policies/tests }
+        with: { files: policies/tests }
       - uses: bridgecrewio/checkov-action@v12
-        with: { directory: multicloudx/terraform, config_file: multicloudx/.checkov.yml, soft_fail: true }
+        with: { directory: terraform, config_file: .checkov.yml, soft_fail: true }
       - uses: returntocorp/semgrep-action@v1
-        with: { config: multicloudx/.semgrep.yml }
+        with: { config: .semgrep.yml }
       - uses: aquasecurity/trivy-action@0.28.0
-        with: { scan-type: config, scan-ref: multicloudx }
+        with: { scan-type: config, scan-ref: . }
   kubernetes:
     runs-on: ubuntu-latest
     steps:
@@ -34,5 +34,5 @@ jobs:
       - uses: azure/setup-helm@v4
       - uses: yannh/kubeconform@v1.6.4
         with:
-          args: "-summary -strict -ignore-missing-schemas multicloudx/kubernetes/base"
-      - run: helm lint multicloudx/kubernetes/charts/platform-sample
+          args: "-summary -strict -ignore-missing-schemas kubernetes/base"
+      - run: helm lint kubernetes/charts/platform-sample

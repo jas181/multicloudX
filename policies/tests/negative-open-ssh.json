@@ -1,0 +1,1 @@
+{"resource_changes":[{"address":"aws_security_group_rule.bad","type":"aws_security_group_rule","change":{"after":{"from_port":22,"cidr_blocks":["0.0.0.0/0"],"tags":{"application":"mcx","environment":"dev","owner":"team","cost_center":"cc","managed_by":"terraform"}}}}]}
