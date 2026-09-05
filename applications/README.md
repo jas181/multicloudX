@@ -11,3 +11,13 @@ docker build -t multicloudx/customer-service:dev customer-service
 ```
 
 Use Java 21 and Maven 3.9+. Dockerfiles expect `mvn package` to have produced each module's JAR.
+
+## Local dependencies
+
+Copy `.env.example` to an uncommitted `.env`, set a development-only PostgreSQL password, then start only backing services:
+
+```powershell
+docker compose up -d postgres redis kafka
+```
+
+Run services from separate terminals with `DATABASE_PASSWORD`, `REDIS_HOST`, and `KAFKA_BOOTSTRAP_SERVERS` environment variables as appropriate. The compose configuration is for local development only; production uses the private managed data services provisioned by Terraform.
