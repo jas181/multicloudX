@@ -8,3 +8,4 @@ terraform.tfvars
 .env
 .env.*
 !.env.example
+finops/report.json

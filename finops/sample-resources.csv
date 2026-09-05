@@ -1,0 +1,5 @@
+cloud,account_or_project,environment,application,owner,cost_center,resource_type,resource_id,monthly_cost,utilization_percent,state
+aws,123456789012,dev,multicloudx,platform@example.invalid,platform,ec2,i-001,42.00,3,running
+azure,subscription-id,dev,multicloudx,platform@example.invalid,platform,vm,vm-001,38.00,7,running
+gcp,project-id,dev,multicloudx,platform@example.invalid,platform,compute,instance-001,31.00,65,running
+aws,123456789012,dev,multicloudx,platform@example.invalid,platform,s3,bucket-logs,4.00,0,active

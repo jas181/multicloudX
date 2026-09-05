@@ -1,0 +1,13 @@
+budgets:
+  - cloud: aws
+    environment: dev
+    monthly_limit_usd: 100
+    alert_thresholds_percent: [50, 80, 100]
+  - cloud: azure
+    environment: dev
+    monthly_limit_usd: 100
+    alert_thresholds_percent: [50, 80, 100]
+  - cloud: gcp
+    environment: dev
+    monthly_limit_usd: 100
+    alert_thresholds_percent: [50, 80, 100]

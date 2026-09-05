@@ -83,3 +83,5 @@ Phase 3 is in progress. Private AKS, EKS, and GKE foundations are behind `enable
 Phase 4 is in progress. The Spring Boot service reactor lives in [applications](applications); GitHub Actions builds, tests, containerizes, and scans it with Java 21.
 
 Phase 5 observability foundations are in [observability](observability): OpenTelemetry Collector, Prometheus alerts, Grafana provisioning, and documented SLOs.
+
+Phase 7 FinOps foundations are in [finops](finops): normalized cost data, budget threshold examples, tag controls, and an idle-resource savings report.
