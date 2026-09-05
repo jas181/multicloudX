@@ -1,0 +1,11 @@
+migration: gcp-to-aws
+workloads: [vm, kubernetes, postgresql, object-storage]
+source: gcp
+target: aws
+approval_required: true
+stages: [discovery, assessment, target-provisioning, replication, testing, cutover, validation, rollback]
+tools:
+  vm: AWS Application Migration Service
+  postgresql: AWS Database Migration Service or native logical replication
+  object-storage: Storage Transfer Service or approved synchronization tooling
+  kubernetes: container-image migration and Helm/Kustomize deployment to EKS
