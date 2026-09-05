@@ -69,3 +69,13 @@ Terraform syntax, module wiring, policy tests, and static scans run without clou
 ## Phase 2
 
 Add private compute, load balancing, encrypted object storage/data services, private endpoints, and cloud-native security-service enablement. Details are in [docs/phase-2-plan.md](docs/phase-2-plan.md).
+
+Phase 2 is in progress. The first increment adds optional secure object-storage modules; see [the Phase 2 implementation plan](docs/phase-2-implementation-plan.md). It is disabled by default with `enable_phase2_storage = false`.
+
+Phase 2B adds optional private PostgreSQL foundations with `enable_phase2_databases = false`. Never place database passwords in `terraform.tfvars`; inject them from an approved secret store or CI secret at deployment time.
+
+Phase 2C adds optional private VMSS/ASG/MIG and internal load-balancer foundations with `enable_phase2_compute = false`. Enabling Azure requires an SSH public key; enabling AWS requires an approved AMI ID. No public IPs or public management ports are created by these modules.
+
+Phase 2D adds optional cloud-native security services with `enable_phase2_security = false`. Review subscriptions, billing, regional availability, and organization-level permissions before enabling it.
+
+Phase 3 is in progress. Private AKS, EKS, and GKE foundations are behind `enable_phase3_kubernetes = false`; see [the Phase 3 implementation plan](docs/phase-3-implementation-plan.md).

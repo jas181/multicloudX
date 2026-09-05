@@ -27,3 +27,12 @@ jobs:
         with: { config: multicloudx/.semgrep.yml }
       - uses: aquasecurity/trivy-action@0.28.0
         with: { scan-type: config, scan-ref: multicloudx }
+  kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+      - uses: yannh/kubeconform@v1.6.4
+        with:
+          args: "-summary -strict -ignore-missing-schemas multicloudx/kubernetes/base"
+      - run: helm lint multicloudx/kubernetes/charts/platform-sample

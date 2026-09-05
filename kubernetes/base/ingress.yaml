@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: platform-sample
+  namespace: multicloudx
+  annotations:
+    kubernetes.io/ingress.class: internal
+spec:
+  rules:
+    - host: platform.internal.example.invalid
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: platform-sample, port: { name: http } }

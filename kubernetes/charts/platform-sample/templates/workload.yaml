@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: {{ .Chart.Name }} }
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: { matchLabels: { app: {{ .Chart.Name }} } }
+  template:
+    metadata: { labels: { app: {{ .Chart.Name }} } }
+    spec:
+      securityContext: { seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: application
+          image: {{ .Values.image }}
+          ports: [{ containerPort: {{ .Values.servicePort }}, name: http }]
+          env:
+            - name: DATABASE_URL
+              valueFrom: { secretKeyRef: { name: {{ .Values.secretName }}, key: database-url } }
+          resources: { requests: { cpu: 100m, memory: 128Mi }, limits: { cpu: 500m, memory: 256Mi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, capabilities: { drop: [ALL] } }
+          livenessProbe: { httpGet: { path: /, port: http } }
+          readinessProbe: { httpGet: { path: /, port: http } }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: {{ .Chart.Name }} }
+spec: { selector: { app: {{ .Chart.Name }} }, ports: [{ port: {{ .Values.servicePort }}, targetPort: http }] }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: {{ .Chart.Name }} }
+spec: { minAvailable: 1, selector: { matchLabels: { app: {{ .Chart.Name }} } } }

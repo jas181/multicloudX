@@ -23,6 +23,12 @@ resource "azurerm_subnet" "data" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.spoke.name
   address_prefixes     = ["10.41.2.0/24"]
+  delegation {
+    name = "postgresql"
+    service_delegation {
+      name = "Microsoft.DBforPostgreSQL/flexibleServers"
+    }
+  }
 }
 resource "azurerm_network_security_group" "app" {
   name                = "nsg-${var.name_prefix}-app"

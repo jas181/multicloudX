@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: platform-data
+  namespace: multicloudx
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: platform-default
+  resources:
+    requests:
+      storage: 1Gi
