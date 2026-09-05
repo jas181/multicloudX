@@ -1,0 +1,35 @@
+name: Build and scan services
+on:
+  pull_request:
+    paths: ["multicloudx/applications/**"]
+  push:
+    branches: [main, develop]
+    paths: ["multicloudx/applications/**"]
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: multicloudx/applications
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - run: mvn --batch-mode verify
+      - name: Build container images
+        run: |
+          for service in customer-service order-service payment-service notification-service; do
+            docker build --tag "multicloudx/${service}:${{ github.sha }}" "${service}"
+          done
+      - uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: multicloudx/customer-service:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true

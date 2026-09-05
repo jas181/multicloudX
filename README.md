@@ -79,3 +79,5 @@ Phase 2C adds optional private VMSS/ASG/MIG and internal load-balancer foundatio
 Phase 2D adds optional cloud-native security services with `enable_phase2_security = false`. Review subscriptions, billing, regional availability, and organization-level permissions before enabling it.
 
 Phase 3 is in progress. Private AKS, EKS, and GKE foundations are behind `enable_phase3_kubernetes = false`; see [the Phase 3 implementation plan](docs/phase-3-implementation-plan.md).
+
+Phase 4 is in progress. The Spring Boot service reactor lives in [applications](applications); GitHub Actions builds, tests, containerizes, and scans it with Java 21.
