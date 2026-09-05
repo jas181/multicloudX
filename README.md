@@ -89,3 +89,5 @@ Phase 7 FinOps foundations are in [finops](finops): normalized cost data, budget
 Phase 8 DR foundations are in [dr](dr): an AWS-primary/Azure-secondary scenario, RTO/RPO targets, and approved-manual failover/failback runbooks.
 
 Phase 9 migration foundations are in [migrations](migrations): cross-cloud planning adapters, workload runbooks, and a six-direction migration matrix.
+
+Phase 10 command-center API is in [platform-api](platform-api): a safe FastAPI overview of mock multi-cloud health, SLO, security, cost, and migration data.
